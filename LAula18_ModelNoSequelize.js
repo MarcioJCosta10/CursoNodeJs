@@ -9,7 +9,7 @@ sequelize.authenticate().then(function(){
 
 // Vamos aprender a criar um model que é uma referecia da sua tabela dentro do sequelize
 // Nessa aula vamos aprender a criar uma tabela dentro do sequelize aqui no node
-//Vamos criar um model de postagem e um de usuários
+// Vamos criar um model de postagem e um de usuários
 
 // Criar o model Postagem
 const Postagem = sequelize.define('postagem',{          // Dentro dessa função define temos os parametros:
