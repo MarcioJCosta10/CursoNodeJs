@@ -24,7 +24,11 @@ const handlebars = require('express-handlebars');
 
 
 // 4 Agora precisamos criar uma pasta chamada views 
-
+// 7 Começando a criar um formulário:
+// Vamos criar uma rota get
+app.get('/cad',(req,res)=>{
+    res.send("Rota de cadastro de Posts!")
+})        
 
 app.listen(9070,()=>{
     console.log("Servidor rodando na porta 9070");
