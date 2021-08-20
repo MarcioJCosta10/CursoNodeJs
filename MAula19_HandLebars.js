@@ -1,6 +1,14 @@
-const express = require('express');
+const express = require("express");
 const app = express();
 
+const handlebars = require("express-handlebars");
+app.engine('handlebars', handlebars({defaultLayout: 'main'})) // o main é o template padrão da aplicação
+app.set('view engine', 'handlebars')
+
+const Sequelize = require('sequelize');
+const sequelize = new Sequelize('teste','root','admin',{host: "localhost", dialect: 'mysql'})
+
+        
 
 /* 1 Vamos usar o handLebars que oferece muitas funiconalidade para o html:
      Podemos usar estruturas condicionais dentro do html
@@ -11,25 +19,30 @@ const app = express();
 
 
 // 2 Criar uma variável para receber o handlebars
-const handlebars = require('express-handlebars');
+//const handlebars = require('express-handlebars');
 
 // 3 Temos que configurar o handlebars, tenho que dizer para o express que queremos usar o handlebars como template engines
 // Config
     //Template Engine
-        app.engine('handlebars', handlebars({defaultLayout: 'main'})) // o main é o template padrão da aplicação
-        app.set('view engine', 'handlebars')
-        // 6 Agora voui cofigurar o acesso ao banco de dados dentro do meu arquivo atual
-            const Sequelize = require('sequelize');
-            const sequelize = new Sequelize('teste','root','admin',{host: "localhost", dialect: 'mysql'})
+        // app.engine('handlebars', handlebars({defaultLayout: 'main'})) // o main é o template padrão da aplicação
+        // app.set('view engine', 'handlebars')
+        // // 6 Agora voui cofigurar o acesso ao banco de dados dentro do meu arquivo atual
+            // const Sequelize = require('sequelize');
+            // const sequelize = new Sequelize('teste','root','admin',{host: "localhost", dialect: 'mysql'})
 
 
 // 4 Agora precisamos criar uma pasta chamada views 
 // 7 Começando a criar um formulário:
 // Vamos criar uma rota get
-app.get('/cad',(req,res)=>{
-    res.send("Rota de cadastro de Posts!")
-})        
+app.get('/cad',function(req,res){
+                                    //res.send("Rota de cadastro de Posts!")
+                                     //10 colocando o formulario na rota
+    res.render('formulario')        // Esse formulario é o nome do arquivo
+})       
+ 
+//8 Agora vou na pasta views handlebars vou criar o arquivo formulário
 
-app.listen(9070,()=>{
+ 
+app.listen(9070,function(){
     console.log("Servidor rodando na porta 9070");
-})
+});
