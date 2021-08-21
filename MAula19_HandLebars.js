@@ -5,6 +5,16 @@ const handlebars = require("express-handlebars");
 app.engine('handlebars', handlebars({defaultLayout: 'main'})) // o main é o template padrão da aplicação
 app.set('view engine', 'handlebars')
 
+
+// 12 Vamos usar o Body Parser
+const bodyParser = require('body-parser');
+
+// Configurar o bodyParser
+app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.json())
+
+
+
 const Sequelize = require('sequelize');
 const sequelize = new Sequelize('teste','root','admin',{host: "localhost", dialect: 'mysql'})
 
@@ -37,10 +47,23 @@ const sequelize = new Sequelize('teste','root','admin',{host: "localhost", diale
 app.get('/cad',function(req,res){
                                     //res.send("Rota de cadastro de Posts!")
                                      //10 colocando o formulario na rota
-    res.render('formulario')        // Esse formulario é o nome do arquivo
+    res.render('formulario');        // Esse formulario é o nome do arquivo
 })       
  
 //8 Agora vou na pasta views handlebars vou criar o arquivo formulário
+
+
+// 11 Criando uma nova rota como vamos usar o post precisamos mudar para app.post
+app.post('/adicionar',(req, res)=>{
+    //req.body.conteudo   // pegar os dados do formulario
+    
+    res.send("Texto: "+req.body.titulo+" Conteudo: "+req.body.conteudo);
+
+})
+
+// 12 Vamos usar o Body Parser - pegar os dados do formulario
+
+
 
  
 app.listen(9070,function(){
