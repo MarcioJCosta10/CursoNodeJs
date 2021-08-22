@@ -12,13 +12,7 @@ const bodyParser = require('body-parser');
 // Configurar o bodyParser
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
-
-
-
-const Sequelize = require('sequelize');
-const sequelize = new Sequelize('teste','root','admin',{host: "localhost", dialect: 'mysql'})
-
-        
+       
 
 /* 1 Vamos usar o handLebars que oferece muitas funiconalidade para o html:
      Podemos usar estruturas condicionais dentro do html
@@ -36,10 +30,7 @@ const sequelize = new Sequelize('teste','root','admin',{host: "localhost", diale
     //Template Engine
         // app.engine('handlebars', handlebars({defaultLayout: 'main'})) // o main é o template padrão da aplicação
         // app.set('view engine', 'handlebars')
-        // // 6 Agora voui cofigurar o acesso ao banco de dados dentro do meu arquivo atual
-            // const Sequelize = require('sequelize');
-            // const sequelize = new Sequelize('teste','root','admin',{host: "localhost", dialect: 'mysql'})
-
+        
 
 // 4 Agora precisamos criar uma pasta chamada views 
 // 7 Começando a criar um formulário:
@@ -62,6 +53,11 @@ app.post('/adicionar',(req, res)=>{
 })
 
 // 12 Vamos usar o Body Parser - pegar os dados do formulario
+// 13 Agora vamos estruturar o banco de dados, precisamos criar o banco via mysql no terminal
+// 13 depois vou criar uma pasta para os models e dentro de model db.js
+
+
+
 
 
 
