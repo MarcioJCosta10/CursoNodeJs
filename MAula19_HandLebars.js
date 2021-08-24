@@ -5,6 +5,10 @@ const handlebars = require("express-handlebars");
 app.engine('handlebars', handlebars({defaultLayout: 'main'})) // o main é o template padrão da aplicação
 app.set('view engine', 'handlebars')
 
+//21 Criar uma constante para recebe o model POST aqui nesse arquivo que seria o index.js e vamos manipular o POST debntro desse mesmo arquivo
+const Post = require('./models/Post');
+
+
 
 // 12 Vamos usar o Body Parser
 const bodyParser = require('body-parser');
@@ -46,21 +50,32 @@ app.get('/cad',function(req,res){
 
 // 11 Criando uma nova rota como vamos usar o post precisamos mudar para app.post
 app.post('/adicionar',(req, res)=>{
-    //req.body.conteudo   // pegar os dados do formulario
+    //req.body.conteudo   // pegar os dados do formulario    
+    //res.send("Texto: "+req.body.titulo+" Conteudo: "+req.body.conteudo);
     
-    res.send("Texto: "+req.body.titulo+" Conteudo: "+req.body.conteudo);
-
+    // 22 Agora dentro da nossa rota vou criar o novo Post
+    Post.create({
+        Titulo: req.body.Titulo,
+        Conteudo: req.body.Conteudo
+    // 23 Agora vou exibir uma mensagem quando o Post for criado com sucesso
+    }).then(function(){
+        //res.send("Post Criado com sucesso");
+        // 27 vou criar o redirecionamento // 28 testar
+        res.redirect('/');
+        // 24 Caso tenha alguma falha vou chamar o catch
+    }).catch(function(erro){
+        res.send("Houve um erro: " + erro)
+    })
+    // 25 agora vou testar enviando uma postagem do formulário e vou abrir o mysql para ver se está na tabela
+    // 26 Agora vou criar um redirecionamento na pagina depois para depois de enviar as postagens
+    app.get('/', function(req,res){
+        res.render('home') // Nossa rota vai renderizar um arquvi chamado home que está dentro da pasta views
+    })
 })
 
 // 12 Vamos usar o Body Parser - pegar os dados do formulario
 // 13 Agora vamos estruturar o banco de dados, precisamos criar o banco via mysql no terminal
 // 13 depois vou criar uma pasta para os models e dentro de model db.js
-
-
-
-
-
-
  
 app.listen(9070,function(){
     console.log("Servidor rodando na porta 9070");

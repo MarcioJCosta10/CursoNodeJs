@@ -16,6 +16,8 @@ const Post = db.sequelize.define('tabela_postagens', {
 
 });
 
+// 21 Agora vou pegar os dados que vem do formulário e guardar no banco
+
 //19 Agora vamos ver se está funcionando e se vai gerar a tabela, apos gerar apague ou comente a linha abaixo:
 //Post.sync({force: true})
 
