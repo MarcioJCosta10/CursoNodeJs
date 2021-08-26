@@ -1,4 +1,6 @@
 // 16  vou pegar o arquivo db.js (./ que está na mesma pasta) e guardar em uma const
+//const Sequelize = require('sequelize')
+
 const db = require('./db.js');
 
 //17 Definir um novo Post
@@ -6,11 +8,11 @@ const db = require('./db.js');
 const Post = db.sequelize.define('tabela_postagens', {
     //18 Agora vou definir minha tabela
     // Campo Titulo
-    Titulo: {
-        type: db.Sequelize.STRING,
+    titulo: {
+        type: db.Sequelize.STRING
     },
     // Campo Conteudo
-    Conteudo:{
+    conteudo:{
         type: db.Sequelize.TEXT
     }
 
@@ -22,5 +24,5 @@ const Post = db.sequelize.define('tabela_postagens', {
 //Post.sync({force: true})
 
 //20 agora vou exportar o modeles Post para acessar em outros arquivos
-module.exports = Post;
+module.exports = Post
 

@@ -1,8 +1,7 @@
-// // 13 Agora voui cofigurar o acesso ao banco de dados
-           
+// // 13 Agora voui cofigurar o acesso ao banco de dados           
 const Sequelize = require('sequelize');
                              // nome do banco //local  //senha  // local           //linguagem
-const sequelize = new Sequelize('postapp',    'root',  'admin', {host: "localhost", dialect: 'mysql'})
+const sequelize = new Sequelize('postapp','root','admin', {host: "localhost", dialect: 'mysql'})
 
 //14 vou exportar o db.js
 module.exports = {

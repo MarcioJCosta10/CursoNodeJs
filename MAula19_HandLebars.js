@@ -1,12 +1,13 @@
 const express = require("express");
 const app = express();
 
+
 const handlebars = require("express-handlebars");
 app.engine('handlebars', handlebars({defaultLayout: 'main'})) // o main é o template padrão da aplicação
 app.set('view engine', 'handlebars')
 
 //21 Criar uma constante para recebe o model POST aqui nesse arquivo que seria o index.js e vamos manipular o POST debntro desse mesmo arquivo
-const Post = require('./models/Post');
+const Post = require('./models/Post')
 
 
 
@@ -16,6 +17,20 @@ const bodyParser = require('body-parser');
 // Configurar o bodyParser
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
+
+//Rotas
+app.get('/', function(req,res){
+    // 29 Agora vamos exibir os dados do banco de dados na nossa página home
+    // 29 Assim ele vai retornar todos os dados da tabela_postagens
+    // 29 Depos chamamos o .then  para exibir os dados na view
+    Post.all().then(function(posts){ //29 o then recebe como parametro da função o posts -- pode ser qualquer nome como parametro
+    res.render('home',{posts: posts})// 29dentro do then vamos chamar o res.render
+                                                    // Dentro das chaves conseguimos passar qualque dado para o front
+
+                                     // Nossa rota vai renderizar um arquvi chamado home que está dentro da pasta views
+    })
+    //res.render('home') // Nossa rota vai renderizar um arquvi chamado home que está dentro da pasta views
+})
        
 
 /* 1 Vamos usar o handLebars que oferece muitas funiconalidade para o html:
@@ -55,8 +70,8 @@ app.post('/adicionar',(req, res)=>{
     
     // 22 Agora dentro da nossa rota vou criar o novo Post
     Post.create({
-        Titulo: req.body.Titulo,
-        Conteudo: req.body.Conteudo
+        titulo: req.body.titulo,
+        conteudo: req.body.conteudo
     // 23 Agora vou exibir uma mensagem quando o Post for criado com sucesso
     }).then(function(){
         //res.send("Post Criado com sucesso");
@@ -68,15 +83,15 @@ app.post('/adicionar',(req, res)=>{
     })
     // 25 agora vou testar enviando uma postagem do formulário e vou abrir o mysql para ver se está na tabela
     // 26 Agora vou criar um redirecionamento na pagina depois para depois de enviar as postagens
-    app.get('/', function(req,res){
-        res.render('home') // Nossa rota vai renderizar um arquvi chamado home que está dentro da pasta views
-    })
+
 })
 
 // 12 Vamos usar o Body Parser - pegar os dados do formulario
 // 13 Agora vamos estruturar o banco de dados, precisamos criar o banco via mysql no terminal
 // 13 depois vou criar uma pasta para os models e dentro de model db.js
+
  
-app.listen(9070,function(){
-    console.log("Servidor rodando na porta 9070");
+ 
+app.listen(8081,    function(){
+    console.log("Servidor rodando na porta 8081");
 });
